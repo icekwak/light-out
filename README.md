@@ -1,29 +1,27 @@
-# LightsOut Gmae
-라이트 아웃 퍼즐: 하나의 블록을 클릭하면 인접한 다른 블록들이 켜지거나 꺼지는 게임
+## Description
+<strong>라이트 아웃 퍼즐</strong> : 하나의 블록을 클릭하면 인접한 다른 블록들이 켜지거나 꺼지는 게임
 
 ![LightsOutIllustration svg](https://user-images.githubusercontent.com/77434165/104590965-647b4d80-56af-11eb-92ee-46f949bfb0b8.png) <br />
-https://en.wikipedia.org/wiki/Lights_Out_(game)
 
-Game Engine, Language
--------------
-Unity, C#
-
-Game Video
--------------
-
-
-Game Concept
---------------
+<strong>Game Concept</strong>
 1. 퍼즐 게임을 3D로 구현
 2. 우주 컨셉으로 제작
 3. 장애물 등장
 4. 난이도 별 스테이지
 
-Player Implement
---------------
-<h3>생성</h3>
-<pre>
-<code>
+[이미지 출처](https://en.wikipedia.org/wiki/Lights_Out_(game))
+
+## Tech Stack
+<img src="https://img.shields.io/badge/Unity-2020.1.3f-000000?style=flat-square&logo=Unity&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/C%23-00599C?style=flat-square" /></a>
+
+## Game Video
+[게임 영상 준비중]()
+
+## Code
+#### Player Implement
+1. 생성
+```C#
 Input.GetMouseButtonDown(0)
 ->  마우스 왼쪽 클릭하면 플레이어 생성
 ScreenPointToRay(Input.mousePosition)
@@ -34,36 +32,30 @@ SceneManager.LoadScene()
 -> 플레이어가 떨어지거나 장애물에 걸리면  재시작
 player_check 
 -> 플레이어 중복 생성을 막기 위한 변수
-</code>
-</pre>
+```
 
-<h3>이동</h3>
-<pre>
-<code>
+2. 이동
+```C#
 Input.GetKey(KeyCode. ), transform.Translate()
 -> 방향키 이동
 Input.GetAxisRaw() 
 -> -1, 0, 1 값을 통해 대각선 방향 설정
 transform.rotation = Quaternion.Euler()
 -> 플레이어를 회전하여 앞 방향 설정
-</code>
-</pre>
+```
 
-<h3>점프</h3>
-<pre>
-<code>
+3. 점프
+```C#
 Input.GetKeyDown(KeyCode.Space)
 -> 스페이스바 점프
 GetComponent <Rigidbody>().velocity()
 -> 점프 높이 설정
 Jump_count 
 -> 더블 점프를 구현하기 위해 점프 횟수 제한 변수
-</code>
-</pre>
+```
 
-<h3></h3>
-<pre>
-<code>
+4.
+```C#
 gameObject.tag
 -> 태그를 통해 충돌한 물체 확인
 GameObject.Find()
@@ -72,24 +64,19 @@ OnCollisionEnter()
 -> 발판 충돌 감지
 OnTriggerEnter()
 -> 장애물끼리 충돌 무시 (단, 플레이어와 충돌 시 재시작)
-</code>
-</pre>
+```
 
-<h3>애니메이션, 사운드</h3>
-<pre>
-<code>
+5. 애니메이션, 사운드
+```C#
 GetComponent<Animator>().Play()
 -> 플레이어 애니메이터 재생
 GetComponent<AudioSoruce>().Play()
 -> 블록과 충돌하면 블록 사운드 재생
-</code>
-</pre>
+```
 
-Block Implement
--------------
-<h3>생성</h3>
-<pre>
-<code>
+#### Block Implement
+1. 생성
+```C#
 2차원 배열 [ , ], Instantiate()
 -> 블록의 상태를 변경하기 위해 생성하면서 배열에 저장
 GetComponent<Renderer>().material.SetColor()
@@ -98,12 +85,10 @@ Random.Range()
 -> 블록마다  조명 ON/OFF 값을 0과 1로 랜덤하게 지정
 Destroy()
 -> 만약 조명이 모두 OFF 상태로 생성되면 삭제 후 재생성
-</code>
-</pre>
+```
 
-<h3>인접한 블록 접근, 애니메이션</h3>
-<pre>
-<code>
+2. 인접한 블록 접근, 애니메이션
+```C#
  GetComponent<Animation>().Play()
 -> 블록이 눌리는 표현을 애니메이션을 제작해서 구현
 Physics.Raycast()
@@ -112,14 +97,11 @@ RaycastHit
 -> 쏜 Ray에 맞은 인접한 블록 정보 저장
 (int)(Mathf.Abs())
 -> 블록 배열을 인덱스로 접근하기 위해 => |좌표 값|
-</code>
-</pre>
+```
 
-Layser Implement
--------------
-<h3>생성</h3>
-<pre>
-<code>
+#### Layser Implement
+1. 생성
+```C#
 transform.localScale()
 -> Scale 값을 통해 레이저 가로, 세로 길이 지정
 Vector3.forward, back, left, right
@@ -132,14 +114,11 @@ Destroy()
 -> 다음 레이저 생성될 때 빗나간 레이저는 삭제
 GetComponent<AudioSource>().Play()
 -> 생성될 때만 사운드 재생
-</code>
-</pre>
+```
 
-Boob Implement
-------------
-<h3>생성, 충돌</h3>
-<pre>
-<code>
+#### Boob Implement
+1. 생성, 충돌
+```C#
 2차원 배열 [ , ], Random.Range()
 -> 배열은 블록 위치를 나타내고 그 위치에 폭탄을 랜덤 생성
 Instantiate()
@@ -152,14 +131,11 @@ OnTriggerEnter(), Destroy()
 -> 폭탄이 블록과 충돌 시 폭탄 삭제
 AudioSource.PlayClipAtPoint()
 -> 블록과 충돌하는 위치에 폭탄 터지는 사운드 재생
-</code>
-</pre>
+```
 
-Panel Implement
-----------
-<h3>생성</h3>
-<pre>
-<code>
+#### Panel Implement
+1. 생성
+```C#
 Instantiate()
 -> 패널 생성
 GetChild(), SetParent()
@@ -172,14 +148,10 @@ GetComponent<Text>().color =
 -> 패널 투명도 설정
 GetComponent<AudioSource>.Play()
 -> 패널 사운드
-</code>
-</pre>
-
-Background Implement
----------------
-<h3>배경</h3>
-<pre>
-<code>
+```
+#### Background Implement
+1. 배경
+```C#
 GetComponent<AudioSource>().Play()
 -> 배경 음악
 Camera Object
@@ -190,23 +162,18 @@ DontDestroyOnLoad()
 -> 배경음악과 배경화면 오브젝트 유지
 Destroy()
 -> 마지막 씬 진입 시 배경 관련 오브젝트 삭제 (중복 방지)
-</code>
-</pre>
+```
 
-Scene Implement
--------------
-<h3>씬</h3>
-<pre>
-<code>
+#### Scene Implement
+2. 씬
+```C#
 static 변수
 -> 여러 곳에서 쓰일 씬 인덱스 변수를 stati으로 사용
 SceneManager.LoadScene(), OnClick()
 -> 씬 전환, 버튼 클릭
-</code>
-</pre>
+```
 
-개발일지
--------------
+## 개발일지
 1. 인접한 블록 접근 방법 Linecast나 Raycast를 쓰면 끝나는 쉬운 문제였지만,<br />
 처음 시작할 때는 떠오르지 않아서 몇 일을 고민을 했습니다.<br />
 처음으로 마주한 쉬우면서 어려웠던 첫 번째 어려웠던 점이었습니다. <br />
@@ -222,8 +189,7 @@ Update문에서 Scale값에 접근하는 방식은 매 프레임마다 실행되
 그런데 생긴 문제가 색이 바뀌고 블록을 밟으면 색과 블록의 애니메이션이 달라지는 경우가 생겨<br />
 한참을 고민하다가 폭탄이 생기면 폭탄이 사라질 때까지 블록을 못 밟는 방식으로 구현했습니다.
 
-애셋 출처(애셋스토어)
---------------
+## 애셋 출처(애셋스토어)
 플레이어 – Stylized Astronaut <br />
 블록 – Low Poly Space Rocks <br />
 배경화면 – Space Star Field Backgrounds <br />

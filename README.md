@@ -17,8 +17,8 @@
 
 ## Tech Stack
 
-<img src="[https://img.shields.io/badge/Unity-2020.1.3f-000000?style=flat-square&logo=Unity&logoColor=white](https://img.shields.io/badge/Unity-2020.1.3f-000000?style=flat-square&logo=Unity&logoColor=white)"/></a>
-<img src="[https://img.shields.io/badge/C%23-00599C?style=flat-square](https://img.shields.io/badge/C%23-00599C?style=flat-square)" /></a>
+<img src="https://img.shields.io/badge/Unity-2020.1.3f-000000?style=flat-square&logo=Unity&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/C%23-00599C?style=flat-square" /></a>
 
 ## Game Video
 
